@@ -26,8 +26,7 @@ cities<-read.csv(connection,sep="\t",header=F)
 cities<-cities[grep("^R",cities$V3),]
 library(leaflet)
 map<-addTiles(leaflet())
-map<-addMarkers(map,lng=cities$V6,lat=cities$V5,popup=cities$V3,
-		clusterOptions=markerClusterOptions())
+map<-addMarkers(map,lng=cities$V6,lat=cities$V5,popup=cities$V3)
 map
 ```
 
