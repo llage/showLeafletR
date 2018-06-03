@@ -1,0 +1,48 @@
+---
+title: "Urban Areas Whose Names Start With The Letter R"
+author: "Agelink"
+date: "June, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Demonstration of the leaflet R package
+
+Made for a course assignment. Below R code generates the shown map with markers
+for populated urban areas whose name starts with R. 
+The reason I say urban areas
+is that the dataset, despite being named "cities", also gave me "Retiro" which
+I happen to know is a neigbourhood (barrio) of Madrid City, not a city in its
+own right.
+
+```{r}
+fileurl<-"http://download.geonames.org/export/dump/cities15000.zip"
+download.file(fileurl,destfile="cities.zip",method="auto")
+connection<-unz("cities.zip",filename="cities15000.txt")
+cities<-read.csv(connection,sep="\t",header=F)
+cities<-cities[grep("^R",cities$V3),]
+library(leaflet)
+map<-addTiles(leaflet())
+map<-addMarkers(map,lng=cities$V6,lat=cities$V5,popup=cities$V3,
+		clusterOptions=markerClusterOptions())
+map
+```
+
+Credit to geonames.org for being kind enough to make their data available
+under the CC Attribution 4.0 International (CC BY 4.0) license.
+(https://creativecommons.org/licenses/by/4.0/)
+
+Also all credit to the creators and maintainers of R and its packages who
+make it possible to, with just the few commands noted above, create
+demonstration pages like this one.
+
+The leaflet software itself displays the intellectual property rights associated
+with the the map data it uses: it should be visible in the map above.
+
+```{r}
+date()
+sessionInfo()
+```
