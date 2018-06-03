@@ -1,3 +1,3 @@
 # showLeafletR
 
-Made for a course assignment. 
+Made for a course assignment.
